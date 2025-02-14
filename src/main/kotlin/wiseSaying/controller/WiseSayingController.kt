@@ -2,6 +2,8 @@ package org.example.wiseSaying.controller
 
 import org.example.global.exception.CommandErrorCode
 import org.example.global.exception.CommandException
+import org.example.wiseSaying.exception.WiseSayingErrorCode
+import org.example.wiseSaying.exception.WiseSayingException
 import org.example.wiseSaying.service.WiseSayingService
 
 /**
@@ -42,8 +44,8 @@ class WiseSayingController {
                 CommandErrorCode.INVALID_PARAMETER)
         }
 
-        val id = param["id"]?.toIntOrNull() ?: throw CommandException(
-            CommandErrorCode.INVALID_ID_FORMAT)
+        val id = param["id"]?.toIntOrNull() ?: throw WiseSayingException(
+            WiseSayingErrorCode.INVALID_ID_FORMAT)
 
         if (!wiseSayingService.existsById(id)) {
             println("${id}번 명언은 존재하지 않습니다.")
@@ -59,7 +61,8 @@ class WiseSayingController {
             throw CommandException(CommandErrorCode.INVALID_PARAMETER)
         }
 
-        val id = param["id"]?.toIntOrNull() ?: throw CommandException(CommandErrorCode.INVALID_ID_FORMAT)
+        val id = param["id"]?.toIntOrNull() ?: throw WiseSayingException(
+            WiseSayingErrorCode.INVALID_ID_FORMAT)
 
         val wiseSaying = wiseSayingService.findById(id)
 
